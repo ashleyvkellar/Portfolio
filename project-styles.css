@@ -10,6 +10,22 @@
     margin-bottom: 40px;
 }
 
+.project-hero-image {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.project-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
 .project-category {
     color: #999;
     font-size: 0.95rem;

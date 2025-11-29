@@ -431,6 +431,88 @@ body {
     color: #333;
 }
 
+/* Contact Form Styles */
+.contact-form-wrapper {
+    margin-top: 40px;
+}
+
+.form-title {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-input {
+    padding: 15px;
+    border: 2px solid #ddd;
+    font-size: 1rem;
+    font-family: 'Georgia', serif;
+    transition: border-color 0.3s;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #6b8e9f;
+}
+
+.form-textarea {
+    padding: 15px;
+    border: 2px solid #ddd;
+    font-size: 1rem;
+    font-family: 'Georgia', serif;
+    resize: vertical;
+    transition: border-color 0.3s;
+}
+
+.form-textarea:focus {
+    outline: none;
+    border-color: #6b8e9f;
+}
+
+.form-submit {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-send {
+    background: #7a8c5e;
+    color: #fff;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s;
+    font-family: 'Georgia', serif;
+}
+
+.btn-send:hover {
+    background: #6a7c4e;
+    transform: translateY(-2px);
+}
+
+.btn-send svg {
+    transition: transform 0.3s;
+}
+
+.btn-send:hover svg {
+    transform: translateX(5px);
+}
+
 /* Projects Page */
 #projects.active {
     display: block;
