@@ -123,8 +123,10 @@ function createProjectCarousel(currentFilename) {
     carouselSection.appendChild(carouselWrapper);
     projectDetail.appendChild(carouselSection);
     
-    // Initialize carousel navigation
-    initializeCarouselNavigation(carousel, leftArrow, rightArrow, otherProjects.length);
+    // Initialize carousel navigation after a brief delay to ensure DOM is ready
+    setTimeout(() => {
+        initializeCarouselNavigation(carousel, leftArrow, rightArrow, otherProjects.length);
+    }, 100);
 }
 
 // Initialize carousel navigation
@@ -132,14 +134,32 @@ function initializeCarouselNavigation(carousel, leftArrow, rightArrow, totalItem
     let currentIndex = 0;
     
     function getItemsPerView() {
-        return window.innerWidth <= 768 ? 1 : 3;
+        // Use matchMedia for consistent breakpoint checking
+        return window.matchMedia('(max-width: 768px)').matches ? 1 : 3;
     }
     
     function updateCarousel() {
         const itemsPerView = getItemsPerView();
         const maxIndex = Math.max(0, totalItems - itemsPerView);
-        const offset = currentIndex * (100 / itemsPerView);
-        carousel.style.transform = `translateX(-${offset}%)`;
+        
+        // Get the actual width of one item including gap
+        const items = carousel.querySelectorAll('.carousel-item');
+        if (items.length > 0) {
+            const containerWidth = carousel.parentElement.offsetWidth;
+            const gap = 30; // Match the gap in CSS
+            
+            let itemWidth;
+            if (itemsPerView === 1) {
+                // Mobile: full width
+                itemWidth = containerWidth;
+            } else {
+                // Desktop: calculate width with gaps
+                itemWidth = (containerWidth - (gap * (itemsPerView - 1))) / itemsPerView;
+            }
+            
+            const offset = currentIndex * (itemWidth + gap);
+            carousel.style.transform = `translateX(-${offset}px)`;
+        }
         
         // Update arrow states
         leftArrow.disabled = currentIndex === 0;
@@ -166,13 +186,17 @@ function initializeCarouselNavigation(carousel, leftArrow, rightArrow, totalItem
     });
     
     // Update on window resize
+    let resizeTimeout;
     window.addEventListener('resize', () => {
-        const itemsPerView = getItemsPerView();
-        const maxIndex = Math.max(0, totalItems - itemsPerView);
-        if (currentIndex > maxIndex) {
-            currentIndex = maxIndex;
-        }
-        updateCarousel();
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            const itemsPerView = getItemsPerView();
+            const maxIndex = Math.max(0, totalItems - itemsPerView);
+            if (currentIndex > maxIndex) {
+                currentIndex = maxIndex;
+            }
+            updateCarousel();
+        }, 100);
     });
     
     // Initial state

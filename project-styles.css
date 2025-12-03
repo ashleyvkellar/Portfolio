@@ -183,7 +183,7 @@
 }
 
 .carousel-item {
-    flex: 0 0 calc(33.333% - 20px);
+    flex: 0 0 calc((100% - 60px) / 3);
     display: block;
     text-decoration: none;
     background: #fff;
