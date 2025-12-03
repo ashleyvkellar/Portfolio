@@ -130,10 +130,14 @@ function createProjectCarousel(currentFilename) {
 // Initialize carousel navigation
 function initializeCarouselNavigation(carousel, leftArrow, rightArrow, totalItems) {
     let currentIndex = 0;
-    const itemsPerView = 3;
-    const maxIndex = Math.max(0, totalItems - itemsPerView);
+    
+    function getItemsPerView() {
+        return window.innerWidth <= 768 ? 1 : 3;
+    }
     
     function updateCarousel() {
+        const itemsPerView = getItemsPerView();
+        const maxIndex = Math.max(0, totalItems - itemsPerView);
         const offset = currentIndex * (100 / itemsPerView);
         carousel.style.transform = `translateX(-${offset}%)`;
         
@@ -153,10 +157,22 @@ function initializeCarouselNavigation(carousel, leftArrow, rightArrow, totalItem
     });
     
     rightArrow.addEventListener('click', () => {
+        const itemsPerView = getItemsPerView();
+        const maxIndex = Math.max(0, totalItems - itemsPerView);
         if (currentIndex < maxIndex) {
             currentIndex++;
             updateCarousel();
         }
+    });
+    
+    // Update on window resize
+    window.addEventListener('resize', () => {
+        const itemsPerView = getItemsPerView();
+        const maxIndex = Math.max(0, totalItems - itemsPerView);
+        if (currentIndex > maxIndex) {
+            currentIndex = maxIndex;
+        }
+        updateCarousel();
     });
     
     // Initial state
