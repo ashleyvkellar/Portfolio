@@ -1,0 +1,50 @@
+{
+  "Planted.html": {
+    "title": "Planted",
+    "subtitle": "Planted, a plant based food truck and caterer",
+    "category": "UX/UI Design",
+    "shortBlurb": "Planted, a plant based food truck and caterer",
+    "thumbnailImage": "pictures/planted.png",
+    "heroImage": "pictures/planted.png",
+    "categories": ["website"],
+    "timeline": "January - February 2019",
+    "tools": "Figma, WIX, Google Suites",
+    "role": "Web Designer, UX/UI Designer, UX Research"
+  },
+  "clutch.html": {
+    "title": "Clutch / 'NorthEnd Bank', 2019",
+    "subtitle": "A Mobile Solution That Brings The Power Of Budgeting Into The Hands Of Millennials",
+    "category": "UX/UI Design",
+    "shortBlurb": "A mobile banking solution for millennial budgeting",
+    "thumbnailImage": "pictures/clutch_dashboard.png",
+    "heroImage": "pictures/clutch_dashboard.png",
+    "categories": ["website"],
+    "timeline": "January - February 2019",
+    "tools": "Figma, Google Suites",
+    "role": "UX/UI Designer, UX Research"
+  },
+  "sony.html": {
+    "title": "Sony, 2019",
+    "subtitle": "A Mobile Solution That Brings The Power Of Budgeting Into The Hands Of Millennials",
+    "category": "UX/UI Design",
+    "shortBlurb": "Game creator dashboard design for Sony PlayStation",
+    "thumbnailImage": "pictures/playstation_dashboard.png",
+    "heroImage": "pictures/playstation_dashboard.png",
+    "categories": ["website", "game-ui"],
+    "timeline": "February - March 2019",
+    "tools": "Figma, Google Suites",
+    "role": "UX/UI Designer, UX Research"
+  },
+  "hoosierheights.html": {
+    "title": "Hoosier Heights Bloomington",
+    "subtitle": "Fix! A Mobile Solution That Brings The Power Of Budgeting Into The Hands Of Millennials",
+    "category": "UX/UI Design",
+    "shortBlurb": "Website redesign for Hoosier Heights climbing gym",
+    "thumbnailImage": "pictures/hoosierheightsbloom_dashboard.png",
+    "heroImage": "pictures/hoosierheightsbloom_dashboard.png",
+    "categories": ["website"],
+    "timeline": "February - May 2022",
+    "tools": "Figma, Google Suites, Wix, GoDaddy, .html, .css",
+    "role": "Web Designer"
+  }
+}
