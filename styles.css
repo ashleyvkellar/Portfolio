@@ -352,6 +352,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: fixed;
+    left: 40px;
+    top: 100px;
+    width: 350px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
 }
 
 .contact-photo {
@@ -436,6 +442,7 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
+    margin-left: 450px;
 }
 
 .map-container {
@@ -726,6 +733,19 @@ body {
     .contact-left {
         flex: none;
         width: 100%;
+        position: static;
+        max-height: none;
+        left: auto;
+        top: auto;
+    }
+    
+    .contact-right {
+        margin-left: 0;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
     }
     
     .info-grid {
