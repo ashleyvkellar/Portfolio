@@ -61,38 +61,106 @@ function createProjectCarousel(currentFilename) {
     const projectDetail = document.querySelector('.project-detail');
     if (!projectDetail) return;
     
+    // Get all projects except the current one
+    const otherProjects = Object.keys(projectsData).filter(filename => filename !== currentFilename);
+    
+    if (otherProjects.length === 0) return;
+    
     // Create carousel container
     const carouselSection = document.createElement('section');
     carouselSection.className = 'project-carousel-section';
     carouselSection.innerHTML = '<h2 class="carousel-title">Other Projects</h2>';
     
+    // Create carousel wrapper with navigation
+    const carouselWrapper = document.createElement('div');
+    carouselWrapper.className = 'carousel-wrapper';
+    
+    // Create left arrow
+    const leftArrow = document.createElement('button');
+    leftArrow.className = 'carousel-arrow carousel-arrow-left';
+    leftArrow.innerHTML = '&#8249;';
+    leftArrow.setAttribute('aria-label', 'Previous projects');
+    
+    // Create carousel container
+    const carouselContainer = document.createElement('div');
+    carouselContainer.className = 'carousel-container';
+    
     const carousel = document.createElement('div');
     carousel.className = 'project-carousel';
     
     // Add all projects except the current one
-    Object.keys(projectsData).forEach(filename => {
-        if (filename !== currentFilename) {
-            const project = projectsData[filename];
-            
-            const carouselItem = document.createElement('a');
-            carouselItem.href = filename;
-            carouselItem.className = 'carousel-item';
-            
-            const img = document.createElement('img');
-            img.src = project.heroImage;
-            img.alt = project.title;
-            
-            const title = document.createElement('h4');
-            title.textContent = project.title;
-            
-            carouselItem.appendChild(img);
-            carouselItem.appendChild(title);
-            carousel.appendChild(carouselItem);
+    otherProjects.forEach(filename => {
+        const project = projectsData[filename];
+        
+        const carouselItem = document.createElement('a');
+        carouselItem.href = filename;
+        carouselItem.className = 'carousel-item';
+        
+        const img = document.createElement('img');
+        img.src = project.heroImage;
+        img.alt = project.title;
+        
+        const title = document.createElement('h4');
+        title.textContent = project.title;
+        
+        carouselItem.appendChild(img);
+        carouselItem.appendChild(title);
+        carousel.appendChild(carouselItem);
+    });
+    
+    carouselContainer.appendChild(carousel);
+    
+    // Create right arrow
+    const rightArrow = document.createElement('button');
+    rightArrow.className = 'carousel-arrow carousel-arrow-right';
+    rightArrow.innerHTML = '&#8250;';
+    rightArrow.setAttribute('aria-label', 'Next projects');
+    
+    // Assemble carousel
+    carouselWrapper.appendChild(leftArrow);
+    carouselWrapper.appendChild(carouselContainer);
+    carouselWrapper.appendChild(rightArrow);
+    carouselSection.appendChild(carouselWrapper);
+    projectDetail.appendChild(carouselSection);
+    
+    // Initialize carousel navigation
+    initializeCarouselNavigation(carousel, leftArrow, rightArrow, otherProjects.length);
+}
+
+// Initialize carousel navigation
+function initializeCarouselNavigation(carousel, leftArrow, rightArrow, totalItems) {
+    let currentIndex = 0;
+    const itemsPerView = 3;
+    const maxIndex = Math.max(0, totalItems - itemsPerView);
+    
+    function updateCarousel() {
+        const offset = currentIndex * (100 / itemsPerView);
+        carousel.style.transform = `translateX(-${offset}%)`;
+        
+        // Update arrow states
+        leftArrow.disabled = currentIndex === 0;
+        rightArrow.disabled = currentIndex >= maxIndex;
+        
+        leftArrow.style.opacity = currentIndex === 0 ? '0.3' : '1';
+        rightArrow.style.opacity = currentIndex >= maxIndex ? '0.3' : '1';
+    }
+    
+    leftArrow.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateCarousel();
         }
     });
     
-    carouselSection.appendChild(carousel);
-    projectDetail.appendChild(carouselSection);
+    rightArrow.addEventListener('click', () => {
+        if (currentIndex < maxIndex) {
+            currentIndex++;
+            updateCarousel();
+        }
+    });
+    
+    // Initial state
+    updateCarousel();
 }
 
 // Populate project cards on index and projects pages
