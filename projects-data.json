@@ -46,5 +46,17 @@
     "timeline": "February - May 2022",
     "tools": "Figma, Google Suites, Wix, GoDaddy, .html, .css",
     "role": "Web Designer"
+  },
+  "witcher.html": {
+    "title": "Witcher",
+    "subtitle": "Proposed Redesign of The Witcher UI",
+    "category": "UX/UI Design",
+    "shortBlurb": "Proposed Redesign of The Witcher UI",
+    "thumbnailImage": "pictures/Witcher_noHUD.png",
+    "heroImage": "pictures/Witcher_noHUD.png",
+    "categories": ["game-ui"],
+    "timeline": "March 2019?",
+    "tools": "Photoshop",
+    "role": "UI Designer"
   }
 }
