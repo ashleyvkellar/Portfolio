@@ -1,0 +1,311 @@
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap");
+  :root {
+    --sage:#628252;--sage-dark:#3d5233;--sage-pale:#e8efe3;
+    --cream:#f5f0e8;--parch:#ede5d4;--tan:#c9b99a;
+    --dark:#2d2318;--text2:#5a4a35;--muted:#8a7a68;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  .doc{background:#fff;max-width:760px;margin:0 auto;font-family:"DM Sans",sans-serif;color:var(--dark);box-shadow:0 4px 40px rgba(0,0,0,0.10);}
+
+  .doc-header{background:var(--sage-dark);padding:2rem 2.5rem 1.6rem;}
+  .header-top{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem;}
+  .ak-mark{width:38px;height:38px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.5);display:flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",serif;font-size:14px;color:rgba(255,255,255,0.9);flex-shrink:0;}
+  .header-name{font-family:"Cormorant Garamond",serif;font-size:1.5rem;font-weight:400;color:#f5f0e8;line-height:1.1;}
+  .header-sub{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,240,232,0.55);margin-top:0.2rem;}
+  .header-rule{height:1px;background:rgba(255,255,255,0.15);margin-bottom:1.1rem;}
+  .doc-title-row{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:0.5rem;}
+  .doc-title{font-family:"Cormorant Garamond",serif;font-size:1.75rem;font-weight:300;color:#f5f0e8;line-height:1.1;}
+  .doc-title em{font-style:italic;color:rgba(245,240,232,0.65);}
+  .doc-date{font-size:11px;color:rgba(245,240,232,0.5);letter-spacing:0.05em;}
+
+  .sage-bar{height:4px;background:var(--sage);}
+
+  .doc-body{padding:2rem 2.5rem;}
+
+  .parties-block{background:var(--cream);border-left:3px solid var(--sage);padding:1rem 1.25rem;margin-bottom:2rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .party-label{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--sage);margin-bottom:0.3rem;}
+  .party-value{font-size:13px;color:var(--dark);font-weight:400;}
+  .party-blank{font-size:13px;color:var(--muted);font-style:italic;}
+
+  .tan-rule{border:none;border-top:1px solid var(--tan);margin:1.75rem 0;}
+
+  .clause{margin-bottom:1.75rem;}
+  .clause-header{display:flex;align-items:baseline;gap:0.75rem;margin-bottom:0.6rem;}
+  .clause-num{font-family:"Cormorant Garamond",serif;font-size:1rem;font-weight:400;font-style:italic;color:var(--sage);min-width:1.5rem;}
+  .clause-title{font-family:"DM Sans",sans-serif;font-size:13px;font-weight:500;color:var(--dark);letter-spacing:0.02em;}
+  .clause-body{font-size:12px;color:var(--text2);line-height:1.85;padding-left:2.25rem;}
+
+  .sub-section{margin:0.6rem 0 0.6rem 2.25rem;}
+  .sub-title{font-family:"Cormorant Garamond",serif;font-size:12px;font-style:italic;color:var(--sage-dark);margin-bottom:0.3rem;font-weight:400;}
+  .bullet-list{list-style:none;padding:0;}
+  .bullet-list li{font-size:12px;color:var(--text2);line-height:1.8;padding-left:1rem;position:relative;}
+  .bullet-list li::before{content:"—";position:absolute;left:0;color:var(--tan);}
+
+  .highlight-box{background:var(--cream);border-radius:3px;padding:0.9rem 1.1rem;margin:0.75rem 0 0.75rem 2.25rem;}
+  .payment-row{display:grid;grid-template-columns:1fr auto;gap:0.5rem;padding:0.25rem 0;border-bottom:1px solid rgba(201,185,154,0.3);font-size:12px;color:var(--text2);}
+  .payment-row:last-child{border-bottom:none;}
+  .payment-pct{font-weight:500;color:var(--sage-dark);}
+
+  .exclusions-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.25rem 1rem;margin:0.5rem 0 0 2.25rem;}
+  .excl-item{font-size:12px;color:var(--text2);line-height:1.7;padding-left:0.9rem;position:relative;}
+  .excl-item::before{content:"×";position:absolute;left:0;color:var(--tan);font-size:11px;}
+
+  .sig-section{margin-top:2.5rem;padding-top:2rem;border-top:2px solid var(--sage);}
+  .sig-title{font-family:"Cormorant Garamond",serif;font-size:1.1rem;font-weight:300;color:var(--dark);margin-bottom:1.5rem;text-align:center;letter-spacing:0.05em;}
+  .sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;}
+  .sig-block{}
+  .sig-role{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--sage);margin-bottom:1.5rem;}
+  .sig-line{border-bottom:1.5px solid var(--sage);padding-bottom:0.25rem;margin-bottom:0.4rem;height:36px;}
+  .sig-label{font-size:10px;color:var(--muted);letter-spacing:0.05em;}
+
+  .doc-footer{background:var(--cream);border-top:1px solid var(--tan);padding:0.75rem 2.5rem;display:flex;justify-content:space-between;align-items:center;}
+  .footer-copy{font-size:10px;color:var(--muted);letter-spacing:0.05em;}
+  .footer-law{font-size:10px;color:var(--muted);}
+</style>
+
+<div class="doc">
+  <div class="doc-header">
+    <div class="header-top">
+      <div class="ak-mark">AK</div>
+      <div>
+        <div class="header-name">Ashley Kellar</div>
+        <div class="header-sub">UI/UX Designer &nbsp;·&nbsp; ashleykellar.com</div>
+      </div>
+    </div>
+    <div class="header-rule"></div>
+    <div class="doc-title-row">
+      <div class="doc-title">Website Redesign &amp; <em>UI/UX Design</em> Agreement</div>
+      <div class="doc-date">Date: ___________</div>
+    </div>
+  </div>
+  <div class="sage-bar"></div>
+
+  <div class="doc-body">
+
+    <div class="parties-block">
+      <div>
+        <div class="party-label">Client</div>
+        <div class="party-blank">___________________________</div>
+      </div>
+      <div>
+        <div class="party-label">Designer</div>
+        <div class="party-value">Ashley Kellar</div>
+      </div>
+    </div>
+
+    <div class="clause">
+      <div class="clause-header">
+        <span class="clause-num">1.</span>
+        <span class="clause-title">Scope of Work</span>
+      </div>
+      <p class="clause-body">The Designer will provide website redesign services including UX strategy, UI design, and website implementation.</p>
+      <div class="sub-section">
+        <div class="sub-title">Discovery &amp; Audit</div>
+        <ul class="bullet-list">
+          <li>Review of existing website</li>
+          <li>Identification of structural, usability, and content issues</li>
+        </ul>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">UX Strategy</div>
+        <ul class="bullet-list">
+          <li>Site map (restructured navigation)</li>
+          <li>User flow planning (e.g., injured animal assistance, volunteering, donations)</li>
+        </ul>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">Wireframing</div>
+        <ul class="bullet-list"><li>Low-fidelity wireframes for key page templates</li></ul>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">UI Design</div>
+        <ul class="bullet-list">
+          <li>Visual design including color, typography, and layout</li>
+          <li>High-fidelity mockups for approval</li>
+        </ul>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">Website Implementation</div>
+        <ul class="bullet-list">
+          <li>Website build and setup in WordPress</li>
+          <li>Creation of up to X unique page templates</li>
+          <li>Population of up to X total pages</li>
+          <li>Content organization and placement (client provides content)</li>
+          <li>Basic functionality setup (forms, navigation, links)</li>
+        </ul>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">Testing &amp; Launch</div>
+        <ul class="bullet-list">
+          <li>Cross-device testing</li>
+          <li>Fixing broken links and usability issues</li>
+          <li>Final website launch</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tan-rule"></div>
+
+    <div class="clause">
+      <div class="clause-header">
+        <span class="clause-num">2.</span>
+        <span class="clause-title">Exclusions (Not Included)</span>
+      </div>
+      <div class="exclusions-grid">
+        <div class="excl-item">Full content writing or copywriting</div>
+        <div class="excl-item">Ongoing maintenance after launch</div>
+        <div class="excl-item">Advanced custom functionality or plugins</div>
+        <div class="excl-item">SEO optimization beyond basic structure</div>
+        <div class="excl-item">Major content creation (blog, photography)</div>
+        <div class="excl-item">Work outside this agreed scope</div>
+      </div>
+      <p class="clause-body" style="margin-top:0.6rem;">Additional work outside this scope will be billed separately.</p>
+    </div>
+
+    <div class="tan-rule"></div>
+
+    <div class="clause">
+      <div class="clause-header">
+        <span class="clause-num">3.</span>
+        <span class="clause-title">Timeline</span>
+      </div>
+      <p class="clause-body">Estimated project timeline: 10–16 weeks, depending on client responsiveness.</p>
+      <div class="highlight-box">
+        <div class="payment-row"><span>Discovery &amp; UX Strategy</span><span class="payment-pct">2–3 weeks</span></div>
+        <div class="payment-row"><span>Design (Wireframes + UI)</span><span class="payment-pct">3–5 weeks</span></div>
+        <div class="payment-row"><span>Build &amp; Launch</span><span class="payment-pct">4–8 weeks</span></div>
+      </div>
+      <p class="clause-body">Delays in feedback or content delivery may extend the timeline.</p>
+    </div>
+
+    <div class="tan-rule"></div>
+
+    <div class="clause">
+      <div class="clause-header">
+        <span class="clause-num">4.</span>
+        <span class="clause-title">Payment Terms</span>
+      </div>
+      <p class="clause-body">Total project cost: $___________</p>
+      <div class="highlight-box">
+        <div class="payment-row"><span>25% deposit</span><span class="payment-pct">Due at signing</span></div>
+        <div class="payment-row"><span>25% after wireframe approval</span><span class="payment-pct">Phase 2</span></div>
+        <div class="payment-row"><span>25% after UI design approval</span><span class="payment-pct">Phase 3</span></div>
+        <div class="payment-row"><span>25% upon final delivery</span><span class="payment-pct">Phase 4</span></div>
+      </div>
+      <p class="clause-body">Payments due within 7 days of invoice.</p>
+    </div>
+
+    <div class="tan-rule"></div>
+
+    <div class="clause">
+      <div class="clause-header">
+        <span class="clause-num">5.</span>
+        <span class="clause-title">Revisions &amp; Feedback</span>
+      </div>
+      <ul class="bullet-list" style="padding-left:2.25rem;">
+        <li>Up to 2 rounds of revisions per phase</li>
+        <li>Additional revisions billed at $20/hour</li>
+        <li>Major scope changes require a revised agreement</li>
+      </ul>
+    </div>
+
+    <div class="clause">
+      <div class="clause-header">
+        <span class="clause-num">6.</span>
+        <span class="clause-title">Client Responsibilities</span>
+      </div>
+      <ul class="bullet-list" style="padding-left:2.25rem;">
+        <li>Provide all content, branding, and assets</li>
+        <li>Give feedback within 3–5 business days</li>
+        <li>Ensure content is legally owned or licensed</li>
+      </ul>
+      <p class="clause-body" style="margin-top:0.5rem;">Delays in these responsibilities may impact timeline and cost.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-header">
+        <span class="clause-num">7.</span>
+        <span class="clause-title">Ownership &amp; Portfolio Rights</span>
+      </div>
+      <ul class="bullet-list" style="padding-left:2.25rem;">
+        <li>Final website and design transferred to Client upon full payment</li>
+        <li>Designer retains the right to showcase the project in their portfolio</li>
+      </ul>
+    </div>
+
+    <div class="clause">
+      <div class="clause-header">
+        <span class="clause-num">8.</span>
+        <span class="clause-title">Third-Party Tools</span>
+      </div>
+      <p class="clause-body">Any paid themes, plugins, or tools required will be approved and paid for by the Client.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-header">
+        <span class="clause-num">9.</span>
+        <span class="clause-title">Termination</span>
+      </div>
+      <ul class="bullet-list" style="padding-left:2.25rem;">
+        <li>Either party may terminate with written notice</li>
+        <li>Work completed up to termination must be paid</li>
+        <li>Deposit is non-refundable</li>
+      </ul>
+    </div>
+
+    <div class="clause">
+      <div class="clause-header">
+        <span class="clause-num">10.</span>
+        <span class="clause-title">Liability</span>
+      </div>
+      <p class="clause-body">The Designer is not responsible for website issues after launch without a maintenance agreement, hosting or server-related problems, or specific performance outcomes (traffic, donations, etc.).</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-header">
+        <span class="clause-num">11.</span>
+        <span class="clause-title">Governing Law</span>
+      </div>
+      <p class="clause-body">This Agreement is governed by the laws of the State of Indiana.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-header">
+        <span class="clause-num">12.</span>
+        <span class="clause-title">Entire Agreement</span>
+      </div>
+      <p class="clause-body">This document represents the full agreement and supersedes all prior discussions.</p>
+    </div>
+
+    <div class="sig-section">
+      <div class="sig-title">Signatures</div>
+      <div class="sig-grid">
+        <div class="sig-block">
+          <div class="sig-role">Client</div>
+          <div class="sig-line"></div>
+          <div class="sig-label">Signature &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Date</div>
+          <div style="margin-top:1.25rem;">
+            <div class="sig-line" style="height:24px;"></div>
+            <div class="sig-label">Printed name</div>
+          </div>
+        </div>
+        <div class="sig-block">
+          <div class="sig-role">Designer</div>
+          <div class="sig-line"></div>
+          <div class="sig-label">Signature &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Date</div>
+          <div style="margin-top:1.25rem;">
+            <div class="sig-line" style="height:24px;"></div>
+            <div class="sig-label">Ashley Kellar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="doc-footer">
+    <span class="footer-copy">Ashley Kellar · UI/UX Designer</span>
+    <span class="footer-law">Governed by the laws of the State of Indiana</span>
+  </div>
+</div>
