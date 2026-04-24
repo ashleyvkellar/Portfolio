@@ -1,3 +1,14 @@
+@media print {
+  body {margin: 0;background: #fff;}
+
+  .doc {max-width: 100%;box-shadow: none;}
+
+  .clause,
+  .parties-block,
+  .sig-section {page-break-inside: avoid;}
+
+  .sig-section {page-break-before: always;}
+}
 <style>
   @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap");
   :root {
