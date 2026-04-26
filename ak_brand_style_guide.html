@@ -1,0 +1,302 @@
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap");
+:root{
+  --sage:#628252;--sage-light:#8aaa72;--sage-dark:#3d5233;--sage-pale:#e8efe3;
+  --cream:#f5f0e8;--parch:#ede5d4;--tan:#c9b99a;--brown:#7a5c3a;
+  --dark:#2d2318;--text2:#5a4a35;--muted:#8a7a68;--white:#ffffff;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+.sg{font-family:"DM Sans",sans-serif;color:var(--dark);padding:2rem;background:var(--cream);}
+
+.sg-header{background:var(--sage-dark);padding:2rem 2rem 1.75rem;border-radius:8px;margin-bottom:2rem;position:relative;overflow:hidden;}
+.sg-header::after{content:"AK";position:absolute;right:-0.5rem;bottom:-2rem;font-family:"Cormorant Garamond",serif;font-size:9rem;font-weight:300;color:rgba(255,255,255,0.04);line-height:1;pointer-events:none;}
+.sg-eyebrow{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--sage-light);margin-bottom:0.5rem;opacity:0.8;}
+.sg-title{font-family:"Cormorant Garamond",serif;font-size:2rem;font-weight:300;color:#f5f0e8;line-height:1.1;}
+.sg-title em{font-style:italic;color:var(--sage-light);}
+.sg-subtitle{font-size:12px;color:rgba(245,240,232,0.5);margin-top:0.4rem;letter-spacing:0.04em;}
+
+.section-label{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--sage);margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;}
+.section-label::after{content:"";flex:1;height:1px;background:var(--tan);opacity:0.5;}
+
+.block{margin-bottom:2.5rem;}
+
+.color-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:0.75rem;}
+.swatch{border-radius:6px;overflow:hidden;border:0.5px solid rgba(0,0,0,0.06);}
+.swatch-color{height:64px;}
+.swatch-info{padding:0.6rem 0.75rem;background:#fff;}
+.swatch-name{font-size:12px;font-weight:500;color:var(--dark);margin-bottom:0.15rem;}
+.swatch-hex{font-size:11px;color:var(--muted);font-family:monospace;letter-spacing:0.04em;}
+.swatch-use{font-size:10px;color:var(--muted);margin-top:0.2rem;letter-spacing:0.02em;}
+
+.font-block{background:#fff;border:0.5px solid rgba(201,185,154,0.4);border-radius:8px;padding:1.5rem;margin-bottom:1rem;}
+.font-meta{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.25rem;flex-wrap:wrap;gap:0.5rem;}
+.font-name{font-size:13px;font-weight:500;color:var(--dark);}
+.font-tags{display:flex;gap:0.4rem;flex-wrap:wrap;}
+.font-tag{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--sage-dark);background:var(--sage-pale);padding:0.2rem 0.5rem;border-radius:3px;}
+.font-specimen{border-top:0.5px solid rgba(201,185,154,0.3);padding-top:1.25rem;}
+.spec-row{margin-bottom:1rem;display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;}
+.spec-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);min-width:80px;flex-shrink:0;}
+.spec-text{color:var(--dark);}
+
+.scale-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:0.75rem;margin-top:1rem;}
+.scale-card{background:#fff;border:0.5px solid rgba(201,185,154,0.4);border-radius:6px;padding:0.85rem;}
+.scale-name{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);margin-bottom:0.3rem;}
+.scale-size{font-size:11px;color:var(--muted);margin-bottom:0.6rem;}
+
+.usage-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0.75rem;}
+.usage-card{background:#fff;border:0.5px solid rgba(201,185,154,0.4);border-radius:6px;padding:1rem 1.1rem;}
+.usage-role{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage);margin-bottom:0.4rem;}
+.usage-example{margin-bottom:0.5rem;}
+.usage-rule{font-size:11px;color:var(--muted);line-height:1.6;border-top:0.5px dashed rgba(201,185,154,0.4);padding-top:0.5rem;margin-top:0.5rem;}
+
+.component-row{display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;margin-bottom:0.75rem;}
+.btn-primary-demo{display:inline-block;padding:0.55rem 1.4rem;background:var(--sage);color:#f5f0e8;font-family:"DM Sans",sans-serif;font-size:12px;letter-spacing:0.06em;border-radius:2px;border:none;cursor:pointer;}
+.btn-ghost-demo{display:inline-block;padding:0.55rem 1.4rem;background:transparent;color:var(--sage);font-family:"DM Sans",sans-serif;font-size:12px;letter-spacing:0.06em;border-radius:2px;border:1px solid var(--sage);cursor:pointer;}
+.btn-text-demo{display:inline-block;background:transparent;color:var(--muted);font-family:"DM Sans",sans-serif;font-size:12px;cursor:pointer;border:none;}
+.tag-demo{display:inline-block;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);border:1px solid var(--sage-pale);padding:0.2rem 0.6rem;border-radius:2px;background:rgba(98,130,82,0.06);}
+.ak-mark-demo{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--sage);display:inline-flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",serif;font-size:13px;color:var(--sage);}
+
+.spacing-row{display:flex;align-items:flex-end;gap:0.75rem;flex-wrap:wrap;margin-top:0.75rem;}
+.space-item{display:flex;flex-direction:column;align-items:center;gap:0.4rem;}
+.space-block{background:var(--sage-pale);border:1px solid var(--sage-light);}
+.space-label{font-size:10px;color:var(--muted);letter-spacing:0.06em;}
+.space-val{font-size:10px;font-family:monospace;color:var(--sage-dark);}
+
+.do-dont{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:0.75rem;}
+.do-card{background:#fff;border:0.5px solid rgba(98,130,82,0.3);border-top:3px solid var(--sage);border-radius:0 0 6px 6px;padding:1rem;}
+.dont-card{background:#fff;border:0.5px solid rgba(176,90,47,0.3);border-top:3px solid #b05a2f;border-radius:0 0 6px 6px;padding:1rem;}
+.do-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);margin-bottom:0.6rem;font-weight:500;}
+.dont-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#b05a2f;margin-bottom:0.6rem;font-weight:500;}
+.dd-text{font-size:12px;color:var(--text2);line-height:1.7;}
+</style>
+
+<div class="sg">
+
+<div class="sg-header">
+  <p class="sg-eyebrow">Brand identity system</p>
+  <h1 class="sg-title">Ashley Kellar <em>Style Guide</em></h1>
+  <p class="sg-subtitle">Version 1.0 · UI/UX Designer · ashleykellar.com</p>
+</div>
+
+<div class="block">
+  <div class="section-label">01 · Color palette</div>
+  <div class="color-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#628252;"></div>
+      <div class="swatch-info"><div class="swatch-name">Sage</div><div class="swatch-hex">#628252</div><div class="swatch-use">Primary brand</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#3d5233;"></div>
+      <div class="swatch-info"><div class="swatch-name">Sage Dark</div><div class="swatch-hex">#3D5233</div><div class="swatch-use">Headers, depth</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#8aaa72;"></div>
+      <div class="swatch-info"><div class="swatch-name">Sage Light</div><div class="swatch-hex">#8AAA72</div><div class="swatch-use">Accents on dark</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#e8efe3;"></div>
+      <div class="swatch-info"><div class="swatch-name">Sage Pale</div><div class="swatch-hex">#E8EFE3</div><div class="swatch-use">Tags, highlights</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#f5f0e8;"></div>
+      <div class="swatch-info"><div class="swatch-name">Warm Cream</div><div class="swatch-hex">#F5F0E8</div><div class="swatch-use">Page background</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#ede5d4;"></div>
+      <div class="swatch-info"><div class="swatch-name">Parchment</div><div class="swatch-hex">#EDE5D4</div><div class="swatch-use">Card backgrounds</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#c9b99a;"></div>
+      <div class="swatch-info"><div class="swatch-name">Tan</div><div class="swatch-hex">#C9B99A</div><div class="swatch-use">Rules, dividers</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#2d2318;"></div>
+      <div class="swatch-info"><div class="swatch-name">Warm Dark</div><div class="swatch-hex">#2D2318</div><div class="swatch-use">Body text, nav</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#5a4a35;"></div>
+      <div class="swatch-info"><div class="swatch-name">Brown</div><div class="swatch-hex">#5A4A35</div><div class="swatch-use">Secondary text</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#8a7a68;"></div>
+      <div class="swatch-info"><div class="swatch-name">Muted</div><div class="swatch-hex">#8A7A68</div><div class="swatch-use">Captions, hints</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="section-label">02 · Typography</div>
+
+  <div class="font-block">
+    <div class="font-meta">
+      <div>
+        <div class="font-name">Cormorant Garamond</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">Google Fonts · Free</div>
+      </div>
+      <div class="font-tags">
+        <span class="font-tag">Display</span>
+        <span class="font-tag">Headings</span>
+        <span class="font-tag">Monogram</span>
+      </div>
+    </div>
+    <div class="font-specimen">
+      <div class="spec-row">
+        <span class="spec-label">300 Light</span>
+        <span class="spec-text" style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--dark);">Ashley Kellar</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">300 Italic</span>
+        <span class="spec-text" style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;font-style:italic;color:var(--sage);">Design with care</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">400 Regular</span>
+        <span class="spec-text" style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:var(--dark);">Thoughtful by nature</span>
+      </div>
+      <div class="spec-row" style="margin-bottom:0;">
+        <span class="spec-label">Use for</span>
+        <span style="font-size:12px;color:var(--muted);line-height:1.6;">Page titles, section headings, hero names, project titles, the AK monogram, pull quotes, signature block</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="font-block">
+    <div class="font-meta">
+      <div>
+        <div class="font-name">DM Sans</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">Google Fonts · Free</div>
+      </div>
+      <div class="font-tags">
+        <span class="font-tag">Body</span>
+        <span class="font-tag">UI</span>
+        <span class="font-tag">Labels</span>
+      </div>
+    </div>
+    <div class="font-specimen">
+      <div class="spec-row">
+        <span class="spec-label">300 Light</span>
+        <span class="spec-text" style="font-family:'DM Sans',sans-serif;font-size:15px;font-weight:300;color:var(--text2);line-height:1.8;">Designing experiences that feel considered, calm, and human.</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">400 Regular</span>
+        <span class="spec-text" style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:400;color:var(--dark);">Navigation · Body copy · Tags</span>
+      </div>
+      <div class="spec-row" style="margin-bottom:0;">
+        <span class="spec-label">500 Medium</span>
+        <span class="spec-text" style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--dark);">PROJECT TITLE · LABELS · EYEBROWS</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="section-label">03 · Type scale</div>
+  <div class="scale-grid">
+    <div class="scale-card">
+      <div class="scale-name">Hero</div>
+      <div class="scale-size">4–5.5rem · CG 300</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--dark);line-height:1;">Ashley</div>
+    </div>
+    <div class="scale-card">
+      <div class="scale-name">Section title</div>
+      <div class="scale-size">2–2.5rem · CG 300</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--dark);">Selected Work</div>
+    </div>
+    <div class="scale-card">
+      <div class="scale-name">Project title</div>
+      <div class="scale-size">1.3–1.5rem · CG 400</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:400;color:var(--dark);">Sony — Indie Launch</div>
+    </div>
+    <div class="scale-card">
+      <div class="scale-name">Eyebrow</div>
+      <div class="scale-size">10–11px · DM 500 · caps</div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--sage);">UI/UX Designer</div>
+    </div>
+    <div class="scale-card">
+      <div class="scale-name">Body</div>
+      <div class="scale-size">14–16px · DM 300</div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:300;color:var(--text2);line-height:1.7;">Grounded in research, refined through care.</div>
+    </div>
+    <div class="scale-card">
+      <div class="scale-name">Caption</div>
+      <div class="scale-size">11–12px · DM 400</div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:11px;color:var(--muted);line-height:1.6;">Tags, meta, footnotes, labels</div>
+    </div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="section-label">04 · UI components</div>
+  <div style="background:#fff;border:0.5px solid rgba(201,185,154,0.4);border-radius:8px;padding:1.25rem;">
+    <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.85rem;">Buttons</div>
+    <div class="component-row">
+      <button class="btn-primary-demo">View Work</button>
+      <button class="btn-ghost-demo">Get in touch</button>
+      <span class="btn-text-demo">All projects →</span>
+    </div>
+    <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin:1rem 0 0.85rem;">Tags &amp; marks</div>
+    <div class="component-row">
+      <span class="tag-demo">Product Design</span>
+      <span class="tag-demo">UX Research</span>
+      <span class="tag-demo">Fintech</span>
+      <div class="ak-mark-demo">AK</div>
+    </div>
+    <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin:1rem 0 0.85rem;">Dividers</div>
+    <div style="height:2px;background:var(--sage);border-radius:1px;margin-bottom:0.5rem;"></div>
+    <div style="height:1px;background:var(--tan);margin-bottom:0.5rem;"></div>
+    <div style="height:1px;border-top:1px dashed rgba(201,185,154,0.5);"></div>
+    <div style="display:flex;gap:1.5rem;margin-top:0.5rem;">
+      <span style="font-size:10px;color:var(--muted);">Sage rule — section breaks</span>
+      <span style="font-size:10px;color:var(--muted);">Tan rule — clause dividers</span>
+      <span style="font-size:10px;color:var(--muted);">Dashed — placeholder / subtle</span>
+    </div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="section-label">05 · Spacing &amp; radius</div>
+  <div style="background:#fff;border:0.5px solid rgba(201,185,154,0.4);border-radius:8px;padding:1.25rem;">
+    <div class="spacing-row">
+      <div class="space-item"><div class="space-block" style="width:4px;height:4px;"></div><div class="space-label">4px</div><div class="space-val">xs</div></div>
+      <div class="space-item"><div class="space-block" style="width:8px;height:8px;"></div><div class="space-label">8px</div><div class="space-val">sm</div></div>
+      <div class="space-item"><div class="space-block" style="width:16px;height:16px;"></div><div class="space-label">16px</div><div class="space-val">md</div></div>
+      <div class="space-item"><div class="space-block" style="width:24px;height:24px;"></div><div class="space-label">24px</div><div class="space-val">lg</div></div>
+      <div class="space-item"><div class="space-block" style="width:40px;height:40px;"></div><div class="space-label">40px</div><div class="space-val">xl</div></div>
+      <div class="space-item"><div class="space-block" style="width:64px;height:64px;"></div><div class="space-label">64px</div><div class="space-val">2xl</div></div>
+    </div>
+    <div style="margin-top:1.25rem;display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;">
+      <div style="width:48px;height:48px;background:var(--sage-pale);border:1px solid var(--sage-light);border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;color:var(--sage-dark);">2px</span></div>
+      <div style="width:48px;height:48px;background:var(--sage-pale);border:1px solid var(--sage-light);border-radius:4px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;color:var(--sage-dark);">4px</span></div>
+      <div style="width:48px;height:48px;background:var(--sage-pale);border:1px solid var(--sage-light);border-radius:8px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;color:var(--sage-dark);">8px</span></div>
+      <div style="width:48px;height:48px;background:var(--sage-pale);border:1px solid var(--sage-light);border-radius:50%;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;color:var(--sage-dark);">50%</span></div>
+      <div style="font-size:11px;color:var(--muted);line-height:1.7;max-width:280px;">Use 2px for buttons and tags · 4px for cards · 8px for larger panels · 50% for the AK monogram only</div>
+    </div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="section-label">06 · Voice &amp; usage rules</div>
+  <div class="do-dont">
+    <div class="do-card">
+      <div class="do-label">Do</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:0.4rem;">
+        <li class="dd-text">Use Cormorant Garamond italic in sage for emotional emphasis</li>
+        <li class="dd-text">Pair eyebrow labels (DM Sans caps) with Cormorant headings</li>
+        <li class="dd-text">Use warm cream as the default page background always</li>
+        <li class="dd-text">Keep imagery warm-toned — parchment, earth, natural light</li>
+        <li class="dd-text">Use the AK monogram consistently in circular format</li>
+      </ul>
+    </div>
+    <div class="dont-card">
+      <div class="dont-label">Don't</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:0.4rem;">
+        <li class="dd-text">Use pure black (#000) — always use Warm Dark (#2D2318)</li>
+        <li class="dd-text">Use pure white backgrounds — use Warm Cream (#F5F0E8)</li>
+        <li class="dd-text">Mix in other typefaces — stick to Cormorant + DM Sans only</li>
+        <li class="dd-text">Use the sage green on colored backgrounds without checking contrast</li>
+        <li class="dd-text">Use bold (700) weight in DM Sans — max weight is 500</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div>
